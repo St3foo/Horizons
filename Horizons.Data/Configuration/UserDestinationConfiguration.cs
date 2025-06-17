@@ -18,12 +18,14 @@ namespace Horizons.Data.Configuration
             builder
                 .HasOne(ud => ud.User)
                 .WithMany()
-                .HasForeignKey(ud => ud.UserId);
+                .HasForeignKey(ud => ud.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .HasOne(ud => ud.Destination)
                 .WithMany(d => d.UsersDestinations)
-                .HasForeignKey(ud => ud.DestinationId);
+                .HasForeignKey(ud => ud.DestinationId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .HasQueryFilter(ud => ud.Destination.IsDeleted == false);
